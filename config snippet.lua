@@ -4,7 +4,7 @@
 ------------------------------------------------------------------------------------------
 
 local pushToTalk = true
-local suppressFnKey = true
+local suppressFnKey = false
 local suppressMouseForward = true
 
 ------------------------------------------------------------------------------------------
