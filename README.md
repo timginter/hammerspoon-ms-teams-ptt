@@ -1,4 +1,4 @@
-# MsTeamshammerspoonPtt
+# hammerspoon-ms-teams-ptt
 Hammerspoon config snippet to enable Push-To-Talk for MS Teams calls even if a Teams call is in the background
 
 Binds "Fn" and "Mouse Forward" buttons to mute/unmute on a MS Teams calls
