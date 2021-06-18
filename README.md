@@ -4,6 +4,7 @@ Hammerspoon config snippet to enable Push-To-Talk for MS Teams calls even if a T
 Binds "Fn" and "Mouse Forward" buttons to mute/unmute on a MS Teams calls
 
 # Known issues:
+- with push-to-talk, script may not mute Teams call if you press another mouse button while the mute/unmute mouse button is also pressed - this will reverse push-to-talk into push-to-mute. Mute yourself manually in the Teams call to fix
 - script is sending the mute hotkey to the last active Teams window. Because Teams have multiple windows during a call (one for a call, another for the chat/channels, etc.) if you click on the chat/channels Teams window, mute hotkey will be sent to that window instead of the call. As long as the call window is the last Teams window you clicked, the hotkey will work globally. Fix in progress
 
 # Rudimentary setup:
@@ -28,4 +29,4 @@ Binds "Fn" and "Mouse Forward" buttons to mute/unmute on a MS Teams calls
 - mute your microphone in an MS Teams call - `Fn` and `Mouse Forward (4)` button will mute/unmute your MS Teams call
 
 # Changelog
-- 17/0/2021 - initial release
+- 17/06/2021 - initial release
