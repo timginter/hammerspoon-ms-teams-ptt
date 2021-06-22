@@ -7,20 +7,54 @@ local pushToTalk = true
 local suppressFnKey = false
 local suppressMouseForward = true
 
+local sendToAllTeamsWindows = false
+
 ------------------------------------------------------------------------------------------
 
 local muteKeyPressed = false
 
+function sendMuteKey(application)
+    hs.eventtap.event.newKeyEvent(hs.keycodes.map.shift, true):post(application)
+    hs.eventtap.event.newKeyEvent(hs.keycodes.map.cmd, true):post(application)
+    hs.eventtap.event.newKeyEvent(hs.keycodes.map.m, true):post(application)
+    hs.eventtap.event.newKeyEvent(hs.keycodes.map.m, false):post(application)
+    hs.eventtap.event.newKeyEvent(hs.keycodes.map.shift, false):post(application)
+    hs.eventtap.event.newKeyEvent(hs.keycodes.map.cmd, false):post(application)
+end
+
 function toggleMsTeamsMute()
-    -- TODO: send keystrokes to call window, not to application (last active window of the app)
     local msTeams = hs.appfinder.appFromName("Microsoft Teams")
-    if msTeams ~= nil then
-        hs.eventtap.event.newKeyEvent(hs.keycodes.map.shift, true):post(msTeams)
-        hs.eventtap.event.newKeyEvent(hs.keycodes.map.cmd, true):post(msTeams)
-        hs.eventtap.event.newKeyEvent(hs.keycodes.map.m, true):post(msTeams)
-        hs.eventtap.event.newKeyEvent(hs.keycodes.map.m, false):post(msTeams)
-        hs.eventtap.event.newKeyEvent(hs.keycodes.map.shift, false):post(msTeams)
-        hs.eventtap.event.newKeyEvent(hs.keycodes.map.cmd, false):post(msTeams)
+    if msTeams == nil then
+        return
+    end
+
+    -- save current main MS Teams window and send mute/unmute to it
+    initialMainWindow = msTeams:mainWindow()
+    sendMuteKey(msTeams)
+
+    -- stop if not sending mute key to other windows
+    if not sendToAllTeamsWindows then
+        return
+    end
+
+    for key, window in pairs(msTeams:allWindows()) do
+        if window:title() == "Microsoft Teams Notification"
+            or window == initialMainWindow
+            or window:isMinimized() then
+            goto continue
+        end
+
+        -- make window main and send mute/unmute to it
+        window:becomeMain()
+        sendMuteKey(msTeams)
+
+        -- no real continue in Lua...
+        ::continue::
+    end
+
+    -- restore initial main window
+    if initialMainWindow ~= nil and msTeams:mainWindow() ~= initialMainWindow then
+        initialMainWindow:becomeMain()
     end
 end
 
