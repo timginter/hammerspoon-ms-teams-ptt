@@ -3,11 +3,11 @@
 -- timginter @ GitHub
 ------------------------------------------------------------------------------------------
 
-local pushToTalk = true
+local pushToTalk = false
 local suppressFnKey = false
 local suppressMouseForward = true
 
-local sendToAllTeamsWindows = false
+local sendToAllTeamsWindows = true
 
 ------------------------------------------------------------------------------------------
 
