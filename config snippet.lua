@@ -7,7 +7,7 @@ local pushToTalk = false
 local suppressFnKey = false
 local suppressMouseForward = true
 
-local sendToAllTeamsWindows = true
+local sendToAllTeamsWindows = false
 
 ------------------------------------------------------------------------------------------
 
