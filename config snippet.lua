@@ -23,7 +23,9 @@ function sendMuteKey(application)
 end
 
 function toggleMsTeamsMute()
-    local msTeams = hs.appfinder.appFromName("Microsoft Teams classic")
+    local msTeams = hs.appfinder.appFromName("Microsoft Teams (work or school)")
+    if msTeams == nil then
+        msTeams = hs.appfinder.appFromName("Microsoft Teams classic")
     if msTeams == nil then
         return
     end
