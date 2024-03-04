@@ -26,6 +26,7 @@ function toggleMsTeamsMute()
     local msTeams = hs.appfinder.appFromName("Microsoft Teams (work or school)")
     if msTeams == nil then
         msTeams = hs.appfinder.appFromName("Microsoft Teams classic")
+    end
     if msTeams == nil then
         return
     end
